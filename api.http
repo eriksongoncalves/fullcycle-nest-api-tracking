@@ -1,0 +1,42 @@
+@origin_id={{places_origin.response.body.candidates[0].place_id}}
+@origin_address=
+
+@destination_id={{places_destination.response.body.candidates[0].place_id}}
+@destination_address=
+
+###
+
+# @name places_origin
+GET http://localhost:3000/places?text={{origin_address}}
+
+###
+
+# @name places_destination
+GET http://localhost:3000/places?text={{destination_address}}
+
+###
+
+# @name directions
+GET http://localhost:3000/directions?originId={{origin_id}}&destinationId={{destination_id}}
+
+###
+
+# @name routes
+POST http://localhost:3000/routes
+Content-Type: application/json
+
+{
+  "name": "rota 1",
+  "source_id": "{{origin_id}}",
+  "destination_id": "{{destination_id}}"
+}
+
+###
+
+# @name find_routes
+GET http://localhost:3000/routes
+
+###
+
+# @name find_routes_by_id
+GET http://localhost:3000/routes/1
